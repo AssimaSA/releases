@@ -1,0 +1,21 @@
+version: '3.3'
+
+services:
+  portainer:
+    image: portainer/portainer
+    ports:
+    - mode: host
+      published: 9000
+      target: 9000
+    networks:
+      - portainer-net
+    volumes:
+      - C:\ProgramData\Portainer:C:\Data
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+
+networks:
+  portainer-net:
